@@ -9,6 +9,7 @@ import com.sonoma.ziprange.model.ZipRange;
 import com.sonoma.ziprange.utils.ZipRangeComparator;
 
 /**
+ * Application for zip code validation and minimizing the number of sets.
  * @author deepko
  *
  */
@@ -34,7 +35,7 @@ public class ZipRangeValidatorApp {
 	}
 
 	/**
-	 * Method to calculate the zip ranges . User input is accepted here.
+	 * Method to accept the user input and validate the inputs.
 	 * 
 	 * @param scan
 	 */
@@ -48,7 +49,7 @@ public class ZipRangeValidatorApp {
 			System.out.print(END_RANGE);
 			int end = scan.nextInt();
 			ZipRange range = new ZipRange(start, end);
-			/* Validating if the range entered is valid or not */
+			/* Validating if the range entered is valid or not. */
 			if (range.isValidRange()) {
 				ranges.add(range);
 				counter--;
@@ -67,28 +68,28 @@ public class ZipRangeValidatorApp {
 	}
 
 	/**
-	 * Method to calculate the zip code ranges
+	 * Method to calculate the zip code ranges.
 	 * 
 	 * @param ranges
 	 */
 	public static void calculateZipRanges(List<ZipRange> ranges) {
-		/* The list of ranges is compared using ZipRangeComparator */
+		/* The list of ranges is compared using ZipRangeComparator. */
 		Collections.sort(ranges, new ZipRangeComparator());
-		ZipRange startRange = null;
+		ZipRange currentRange = null;
 		ZipRange nextRange = null;
-		/* Iterating the list and merging the overlapping ranges */
+		/* Iterating the list and merging the overlapping ranges. */
 		for (int i = 0; i < ranges.size() - 1; i++) {
-			startRange = ranges.get(i);
+			currentRange = ranges.get(i);
 			nextRange = ranges.get(i + 1);
-			if (startRange.contains(nextRange.getStartRange())) {
-				startRange.setEndRange(Math.max(nextRange.getEndRange(),
-						startRange.getEndRange()));
-				ranges.set(i, startRange);
+			if (currentRange.contains(nextRange.getStartRange())) {
+				currentRange.setEndRange(Math.max(nextRange.getEndRange(),
+						currentRange.getEndRange()));
+				ranges.set(i, currentRange);
 				ranges.remove(i + 1);
 				i--;
 			}
 		}
-		/* Printing the results after calculation */
+		/* Printing the results after calculation. */
 		System.out.println(RESULTS);
 		for (ZipRange range : ranges) {
 			System.out.println(range.toString());

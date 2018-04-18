@@ -3,6 +3,7 @@ package com.sonoma.ziprange.model;
 import java.io.Serializable;
 
 /**
+ * Model Class which represents range for zip codes.
  * @author deepko
  *
  */
@@ -53,15 +54,18 @@ public class ZipRange implements Serializable {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * Method displays the start and end range in [] brackets
 	 * 
-	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "[ " + startRange + ", " + endRange + " ] ";
 	}
 
+	/**
+	 * Method to validate the ranges which should be between 10000 and 99999.
+	 * @return boolean
+	 */
 	public boolean isValidRange() {
 		if (this.startRange < 10000 || this.startRange > 99999
 				|| this.endRange < 10000 || this.endRange > 99999
@@ -71,8 +75,13 @@ public class ZipRange implements Serializable {
 		return true;
 	}
 
-	public boolean contains(Integer zip) {
-		if (this.startRange <= zip && this.endRange >= zip) {
+	/**
+	 * Method to check if the zip code is between the start and end range.
+	 * @param zipCode
+	 * @return boolean
+	 */
+	public boolean contains(Integer zipCode) {
+		if (this.startRange <= zipCode && this.endRange >= zipCode) {
 			return true;
 		}
 		return false;
