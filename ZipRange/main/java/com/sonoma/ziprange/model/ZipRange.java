@@ -54,6 +54,7 @@ public class ZipRange implements Serializable {
 	}
 
 	/*
+	 * Overriding the toString method.
 	 * Method displays the start and end range in [] brackets
 	 * 
 	 */
